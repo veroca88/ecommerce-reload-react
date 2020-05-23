@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Switch, Route } from 'react-router-dom'
+
+import Navbar from './components/Navbar';
+import ProductList from './components/ProductList/ProductList';
+import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+import DetailsProduct from './components/SingleProduct/DetailsProduct';
+import RandomOutfit from './components/RandomOutfit/RandomOutfit';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Navbar />
+    <Switch>
+      <Route exact path='/findGift' component={RandomOutfit} />
+      <Route exact path='/products' component={ProductList} />
+      <Route path='/details' component={DetailsProduct} />
+      <Route path='/ShoppingCart' component={ShoppingCart} />
+      <Route component={PageNotFound} />
+    </Switch>
+    </>
+   
+
   );
 }
 
