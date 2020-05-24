@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'ABeeZee', sans-serif !important;
+  font-family: 'ABeeZee', sans-serif !important; 
   background-color: var(--mainWhite) !important;
   margin: 5% 15% !important;
 }
@@ -16,6 +16,8 @@ body {
 
 .logo-brand {
   display: block;
+  font-family: 'Kalam', cursive !important;
+  font-size: 2rem;
   margin-left: auto;
   margin-right: auto;
   width: 70px;
@@ -31,5 +33,156 @@ body {
 }
 
 .style-link {
-  margin: 0% 5%;
+  text-decoration: none;
+  color: var(--mainBlack);
+}
+/* SEARCH BAR */
+.search {
+  width: 100%;
+  text-align: center;
+  margin: 7% 2%;
+}
+
+/* BEST SELLERS ACCORDION */
+
+
+.gallery-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70vh;
+  /* margin: 5%; */
+}
+
+.item {
+  flex: 1;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: none;
+  transition: flex 0.8s ease;
+}
+  
+.item:hover{
+    flex: 7;
+}
+
+.item-1 { 
+  background-image: url('https://res.cloudinary.com/veroca/image/upload/v1586028243/ecommerce_ironhack3/000012_ph5bgx.png');
+}
+
+.item-2 { 
+  background-image: url('https://res.cloudinary.com/veroca/image/upload/v1586028234/ecommerce_ironhack3/000030_bbtqm4.png');
+}
+
+.item-3 { 
+  background-image: url('https://res.cloudinary.com/veroca/image/upload/v1586028238/ecommerce_ironhack3/000023_ml9htb.png');
+}
+
+.item-4 { 
+  background-image: url('https://res.cloudinary.com/veroca/image/upload/v1586028232/ecommerce_ironhack3/000029_pyylye.png');
+}
+
+.item-5 { 
+  background-image: url('https://res.cloudinary.com/veroca/image/upload/v1586028224/ecommerce_ironhack3/000037_hn9dye.png');
+}
+
+.social{
+  position: absolute;
+  right: 35px;
+  bottom: 0;
+}
+  
+.social > img {
+    display: block;
+    width: 32px;
+}
+
+/* BUTTONS */ 
+.product-price-btn {
+  height: 103px;
+  width: 327px;
+  margin-top: 17px;
+  position: relative;
+}
+
+.product-price-btn p {
+  display: inline-block;
+  position: absolute;
+  top: -13px;
+  height: 50px;
+  font-family: 'Trocchi', serif;
+  margin: 0 0 0 38px;
+  font-size: 28px;
+  font-weight: lighter;
+  color: #474747;
+}
+/* 
+.product-price-btn button {
+  float: right;
+  display: inline-block;
+  height: 50px;
+  width: 176px;
+  margin: 0 40px 5px 16px;
+  box-sizing: border-box;
+  border: transparent;
+  border-radius: 60px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+  background-color: black;
+  cursor: pointer;
+  outline: none;
+} */
+
+.product-price-btn button:hover {
+  background-color: #79b0a1;
+}
+
+/* PRODUCT IMAGE */
+
+.imageHeigth {
+  height: 220px;
+}
+
+.img-container {
+  height: 260px;
+}
+
+/* LIST PRODUCTS */
+
+.text-card {
+  display: flex;
+  font-size: 0.9rem;
+  justify-content: space-around;
+}
+
+.text-card p {
+  padding: 5%;
+}
+
+.cart-btn {
+  display: flex;
+  position: relative;
+  bottom: 105%;
+  left: 80%;
+}
+
+/* DETAIL CONTAINER */
+
+.size-box {
+  margin-top: 2%;
+  margin-bottom: 7%;
+}
+
+.product-info {
+  text-align: center;
+} 
+
+.product-title {
+  margin-top: 40%;
+
 }

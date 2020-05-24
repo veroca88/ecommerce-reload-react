@@ -9,15 +9,17 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import DetailsProduct from './components/SingleProduct/DetailsProduct';
 import RandomOutfit from './components/RandomOutfit/RandomOutfit';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import HomePage from './components/HomePage/HomePage'
 
 function App() {
   return (
     <>
     <Navbar />
     <Switch>
-      <Route exact path='/findGift' component={RandomOutfit} />
-      <Route exact path='/products' component={ProductList} />
-      <Route path='/details' component={DetailsProduct} />
+    <Route exact path='/' component={HomePage} />
+      <Route path='/findGift' component={RandomOutfit} />
+      <Route path='/products' component={ProductList} />
+      <Route path='/details/:productId' component={DetailsProduct} />
       <Route path='/ShoppingCart' component={ShoppingCart} />
       <Route component={PageNotFound} />
     </Switch>

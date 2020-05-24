@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
 import PRODUCT_SERVICE from '../services/ProductService'
+import { withRouter } from 'react-router-dom';
 
-const ProductContext = React.createContext()
+export const ProductContext  = React.createContext()
 
-class ProductsProvider extends Component {
+class ProductProvider extends Component {
     state = {
         productsList: [],
-        search: []
+        search: [],
+        cart: [],
+        knobOpen: true,
+
     }
 
     componentDidMount() {
@@ -28,6 +32,31 @@ class ProductsProvider extends Component {
           );
     }
 
+    // eachProductDetails = (list) => {
+    //     list.map(product => {
+    //         console.log('PRODUCT DETAILS', product)
+    //     })
+    // }
+
+    handleSearchItems = (e) => {
+        const { value } = e.target;
+        const { productsList } = this.state;
+    
+        const searchItems = productsList.filter((item) => {
+          console.log("Here is the iteeeeeeeeeeeeeem", item);
+          return item.description.toUpperCase().includes(value.toUpperCase());
+          // for (let ea in item) {
+          //   if (item[ea] === value) {
+          //     return item[ea].toLowerCase().includes(value.toLowerCase())
+          //   }
+          // }
+        });
+        this.setState({
+          search: searchItems,
+          productsList: productsList,
+        });
+      };
+
     handleDescription = () => {
         console.log('hello from description')
     }
@@ -46,7 +75,7 @@ class ProductsProvider extends Component {
                 productsList,
                 search,
                 handleDescription,
-                addToCart
+                addToCart,
             }}>
                 {this.props.children}
             </ProductContext.Provider>
@@ -55,6 +84,5 @@ class ProductsProvider extends Component {
     }
 }
 
-const ProductConsumer = ProductContext.Consumer
 
-export { ProductsProvider, ProductConsumer };
+export default withRouter (ProductProvider);
