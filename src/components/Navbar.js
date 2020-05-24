@@ -9,16 +9,17 @@ class Navbar extends Component {
       <Link to='/'>
           <img src={logo} alt='logo' className='logo-brand' />
         </Link>
+        <Link to='/' className='style-link logo-brand'>Aware</Link>
         <nav className='lightnavbar navbar-expand-sm px-sm-5'>
         <ul className='navbar-nav'>
           <li className='navlinks nav-item ml-5'>
-            <Link to='/products' className='nav-link'>
+            <Link to='/products' className='style-link nav-link'>
               Products
             </Link>
             <Link to='/findGift' className='style-link nav-link'>
             Find a Gift
             </Link>
-            <Link to='/shoppingCart' className='ml-auto'>              
+            <Link to='/shoppingCart' className='style-link ml-auto'>              
               <img src="commerce-and-shopping_24x24.png" alt="shopping-cart-icon"></img>
             </Link>
           </li>
