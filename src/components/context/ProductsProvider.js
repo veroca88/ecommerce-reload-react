@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import PRODUCT_SERVICE from "../services/ProductService";
-import axios from "axios";
 
 export const ProductContext = React.createContext();
 
@@ -10,13 +9,11 @@ class ProductProvider extends Component {
     productsList: [],
     search: [],
     orderItem: [],
-    productDetail: [], //detail of item
-    tempProduct: [],
     shoppingCart: [],
-    user: [],
-    isInCart: false,
-    knobOpen: true,
-    currentProduct: []
+    knobOpen: false,
+    currentProduct: [],
+    knobProduct: [],
+    wishList: [],
   };
 
   componentDidMount() {
@@ -32,8 +29,23 @@ class ProductProvider extends Component {
           search: responseFromServer.data,
         }));
       })
-      .catch((err) => console.log("Error while getting the user: ", err));
+      .catch((err) => console.log("Error while getting the product: ", err));
   }
+
+  //TOGGLE WISHLIST
+
+  // toggleProduct = (id) => {
+  //   const { wishList } = this.state
+  //   const product = this.getProduct(id);
+  //   product.favorite = true;
+  //   wishList.push(product);
+  //   console.log('id', product)
+  //   this.setState(state => ({
+  //     wishList: [...wishList],
+  //   }))
+  //   console.log('wishList', this.state.wishList)
+    
+  // }
 
   // SEARCH BAR
 
@@ -86,13 +98,23 @@ addToCart = (order) => {
   console.log('CART added', this.state.shoppingCart)
 }
 
-  // GET ITEM BY ID
+// GET ELEMENT
 
-  getProductById = (id) => {
-    const product = this.state.productsList.find(oneProduct => oneProduct._id === id);
+getProduct = (id) => {
+  const product = this.state.productsList.find(oneProduct => oneProduct._id === id);
+  return product
+
+}
+
+  // SET ITEM BY ID
+
+  setProductById = (id) => {
+    // const product = this.state.productsList.find(oneProduct => oneProduct._id === id);
+    const product = this.getProduct(id);
     this.setState({
       currentProduct: product,
-      orderItem: product
+      orderItem: product,
+      knobProduct: product
     })
   };
 
@@ -113,7 +135,25 @@ addToCart = (order) => {
     }));
   };
 
-  
+  // OPEN MODAL
+
+  openKnob = (id) => {
+    const product = this.getProduct(id);
+    this.setState({
+      knobProduct: product,
+      knobOpen: true
+    })
+    console.log('OPEN-MODAL', this.state.knobOpen)
+  }
+
+  // CLOSE MODAL
+
+  closeKnob = () => {
+    this.setState({
+      knobOpen: false
+    })
+    console.log('CLOSE-MODAL', this.state.knobOpen)
+  } 
 
  
 
@@ -121,34 +161,40 @@ addToCart = (order) => {
     const {
       state,
       addToCart,
-      handleDescription,
-      getProductById,
+      toggleProduct,
+      setProductById,
       handleItem,
       handleSubmit,
       handleSearchItems,
+      openKnob,
+      closeKnob,
     } = this;
     const {
       productsList,
       search,
-      orderItem,
-      isInCart,
+      orderItem,     
       shoppingCart,
+      toggle,
+      knobOpen
     } = this.state;
     return (
       <ProductContext.Provider
         value={{
           state,
+          knobOpen,
           productsList,
           search,
           orderItem,
-          isInCart,
+          toggle,
           shoppingCart,
-          addToCart,
-          handleDescription,
+          openKnob,
+          closeKnob,
+          toggleProduct,          
+          addToCart,  
           handleItem,
           handleSubmit,
           handleSearchItems,
-          getProductById,
+          setProductById,
         }}
       >
         {this.props.children}
