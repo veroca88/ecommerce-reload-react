@@ -15,7 +15,7 @@ class SingleProduct extends Component {
             <div className="col-9 mx-auto col-md-6 col-lg-3 my-3">
               <div className="card">
                 <div className="img-container"
-                onClick={() => context.getProductById(_id)}
+                onClick={() => context.setProductById(_id)}
                 >
                   <Link
                     to={{
@@ -36,15 +36,10 @@ class SingleProduct extends Component {
                   <button
                     className="cart-btn"
                     disabled={inShoppingCart ? true : false}
-                    onClick={() => {
-                      context.addToCart(_id); 
-                      // context.knobOpen(_id);
-                    }}>
-                    {inShoppingCart ? (
-                      <i className="fas fa-cart-arrow-down" disabled></i>
-                    ) : (
-                      <i className="fas fa-tag"></i>
-                    )}
+                    onClick={() => context.openKnob(_id)}                     
+                      >
+                       <i className="fas fa-search-plus"></i>
+                    
                   </button>
                 </div>
               </div>

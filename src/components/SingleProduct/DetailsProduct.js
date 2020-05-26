@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 
 class DetailsProduct extends Component {  
   render() {
-    const { productId } = this.props.match.params;
     return (
       <>
         <ProductContext.Consumer>
           {context => {
             const { currentProduct, orderItem } = context.state;
-            const { handleItem, addToCart, handleSubmit } = context
+            const { handleItem, addToCart, handleSubmit,  } = context
             return (
               // <>
               // hi
@@ -81,7 +80,9 @@ class DetailsProduct extends Component {
                           <button
                             className="product-price-btn"
                             disabled={orderItem.inShoppingCart ? true : false}
-                            onClick={() => {addToCart(orderItem)}}
+                            onClick={() => {
+                              addToCart(orderItem);
+                            }}
                           >
                             {orderItem.inShoppingCart ? (
                               <h6 disabled>In Cart</h6>
