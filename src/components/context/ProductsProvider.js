@@ -1,47 +1,47 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import PRODUCT_SERVICE from '../services/ProductService';
-import axios from 'axios';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import PRODUCT_SERVICE from "../services/ProductService";
+import axios from "axios";
 
-export const ProductContext  = React.createContext()
+export const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
-    state = {
-        productsList: [],
-        search: [],
-        orderItem: [],
-        tempProduct: [],
-        shoppingCart: [],
-        user: [],
-        isInCart: false,
-        knobOpen: true,
-    }
+  state = {
+    productsList: [],
+    search: [],
+    orderItem: [],
+    productDetail: [], //detail of item
+    tempProduct: [],
+    shoppingCart: [],
+    user: [],
+    isInCart: false,
+    knobOpen: true,
+    currentProduct: []
+  };
 
-    componentDidMount() {
-        PRODUCT_SERVICE.getProducts()
-        .then(responseFromServer => {
-            // here i see the user
-            console.log('Authentication.js, LINE31 Response from db: ', responseFromServer.data);
-    
-            this.setState(prevState => ({
-              ...prevState,
-              productsList: responseFromServer.data,
-              search: responseFromServer.data,
-              
-            }));
-          })
-          .catch(err =>
-            console.log('Error while getting the user: ', err)
-          );
-    }    
+  componentDidMount() {
+    PRODUCT_SERVICE.getProducts()
+      .then((responseFromServer) => {
+        console.log(
+          "Authentication.js, LINE31 Response from db: ",
+          responseFromServer.data
+        );
+        this.setState((prevState) => ({
+          ...prevState,
+          productsList: responseFromServer.data,
+          search: responseFromServer.data,
+        }));
+      })
+      .catch((err) => console.log("Error while getting the user: ", err));
+  }
 
-    // Search bar
+  // SEARCH BAR
 
   handleSearchItems = (e) => {
     e.preventDefault();
     const { value } = e.target;
     const { productsList } = this.state;
-    console.log('search value', value)
+    console.log("search value", value);
     const searchItems = productsList.filter((item) => {
       return item.description.toUpperCase().includes(value.toUpperCase());
       // for (let ea in item) {
@@ -50,29 +50,60 @@ class ProductProvider extends Component {
       //   }
       //
     });
-      this.setState({
+    this.setState({
       search: searchItems,
-      productsList: productsList
+      productsList: productsList,
     });
   };
+  
+  // HANDLE SUBMIT FORM
 
-      // Handle submit form
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { orderItem } = this.state;
-    // this.props.history.push("/");
-    this.setState((prevState) => ({
+    orderItem.inShoppingCart = true;
+    orderItem.count = 1;
+    const price = orderItem.cost; 
+    orderItem.total = price;
+        this.setState((prevState) => ({
           ...prevState,
           orderItem: { ...orderItem },
         }));
+        console.log('handlesubmit', this.state.orderItem);
+        console.log('CART added', this.state.shoppingCart)
+      };
+
+// ADD TO CART
+
+addToCart = (order) => {
+  const { shoppingCart } = this.state
+  shoppingCart.push(order)
+  this.setState(prevState => ({
+    ...prevState,
+    shoppingCart: [...shoppingCart]
+  }))
+  console.log('CART added', this.state.shoppingCart)
+}
+
+  // GET ITEM BY ID
+
+  getProductById = (id) => {
+    const product = this.state.productsList.find(oneProduct => oneProduct._id === id);
+    this.setState({
+      currentProduct: product,
+      orderItem: product
+    })
   };
 
-  // Handle any change on order product
+
+  // HANDLE EACH OPTION IN DESCRIPTION OF PRODUCT
 
   handleItem = (e) => {
     e.preventDefault();
     const { value, name } = e.target;
+    console.log("THIS IS VALUE", value);
+    console.log("THIS IS NAME", name);
     this.setState((prevState) => ({
       ...prevState,
       orderItem: {
@@ -83,62 +114,47 @@ class ProductProvider extends Component {
   };
 
   
-  handleItemInCart = (e) => {
-        const { name, value } = e.target;
-        const { orderItem, shoppingCart } = this.state;
-        const currentState = orderItem;
-        console.log('TRUE OR FALSEbefore', orderItem.inShoppingCart)
-        orderItem.inShoppingCart = true;
-        orderItem.count = 1;
-        const price = orderItem.cost;
-        orderItem.total = price
-        // currentState.userShoppingCart.items.push(orderItem);
-        shoppingCart.push(orderItem);
-        currentState[name] = value;
-        this.setState((state) => ({
-          shoppingCart: [...shoppingCart],
-          tempProduct: currentState,
-          isInCart: !state.isInCart,
-        }));
-        console.log('TRUE OR FALSE after', this.state.isInCart)
-        console.log("SHOPPING CART", this.state.shoppingCart);
-      };
 
-      
-     
+ 
 
-    handleDescription = (id) => {
-        console.log('hello from description')
-    }
-
-    addToCart = () => {
-        console.log('add to cart')
-    }
-
-    render() {
-        const { state, handleDescription, addToCart, handleItem, handleSubmit, handleSearchItems } = this;
-        const { productsList, search, orderItem, isInCart, shoppingCart } = this.state
-        return (
-            <ProductContext.Provider
-            value = {{
-                state,
-                productsList,
-                search,
-                orderItem,
-                isInCart,
-                shoppingCart,
-                handleDescription,
-                handleItem,
-                addToCart,
-                handleSubmit,
-                handleSearchItems
-            }}>
-                {this.props.children}
-            </ProductContext.Provider>
-            
-        );
-    }
+  render() {
+    const {
+      state,
+      addToCart,
+      handleDescription,
+      getProductById,
+      handleItem,
+      handleSubmit,
+      handleSearchItems,
+    } = this;
+    const {
+      productsList,
+      search,
+      orderItem,
+      isInCart,
+      shoppingCart,
+    } = this.state;
+    return (
+      <ProductContext.Provider
+        value={{
+          state,
+          productsList,
+          search,
+          orderItem,
+          isInCart,
+          shoppingCart,
+          addToCart,
+          handleDescription,
+          handleItem,
+          handleSubmit,
+          handleSearchItems,
+          getProductById,
+        }}
+      >
+        {this.props.children}
+      </ProductContext.Provider>
+    );
+  }
 }
 
-
-export default withRouter (ProductProvider);
+export default withRouter(ProductProvider);
