@@ -11,7 +11,6 @@ class ProductList extends Component {
           <ProductContext.Consumer>
             {(context) => {
               const { search } = context;
-
               return (
                 <div className="container">
                   <div className="row">

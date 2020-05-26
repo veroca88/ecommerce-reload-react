@@ -10,6 +10,7 @@ import DetailsProduct from './components/SingleProduct/DetailsProduct';
 import RandomOutfit from './components/RandomOutfit/RandomOutfit';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import HomePage from './components/HomePage/HomePage'
+import Modal from './components/Modal/Modal'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path='/ShoppingCart' component={ShoppingCart} />
       <Route component={PageNotFound} />
     </Switch>
+    <Modal />
     </>
    
 
