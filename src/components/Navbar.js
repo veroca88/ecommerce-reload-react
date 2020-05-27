@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../green.png'
+import { ProductContext } from './context/ProductsProvider';
 
 class Navbar extends Component {
   render() {
@@ -19,8 +20,18 @@ class Navbar extends Component {
             <Link to='/findGift' className='style-link nav-link'>
             Find a Gift
             </Link>
-            <Link to='/shoppingCart' className='style-link ml-auto'>              
-              <img src="commerce-and-shopping_24x24.png" alt="shopping-cart-icon"></img>
+            <Link to='/shoppingCart' className='style-link ml-auto'>  
+            <ProductContext.Consumer>
+              {context => {
+                const { shoppingCart } = context;
+                return (
+                  <div className='shopping-cart-img-number'>
+                  <i className="fas fa-shopping-basket"></i>
+                <p>({shoppingCart.length})</p>
+                </div>
+                  )
+              }}
+              </ProductContext.Consumer>            
             </Link>
           </li>
         </ul>

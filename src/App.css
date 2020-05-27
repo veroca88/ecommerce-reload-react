@@ -9,7 +9,35 @@
 body {
   font-family: 'ABeeZee', sans-serif !important; 
   background-color: var(--mainWhite) !important;
-  margin: 5% 15% !important;
+  margin: 5% 10% !important;
+}
+
+/* BUTTONS - + */
+.snippet {
+  display: flex;
+  justify-content: center;
+}
+
+.snip {
+  padding: 30%;
+}
+
+.btn-black {
+  background: transparent;
+  font-size: 0.8rem !important;
+  color: var(--mainBlack);
+  border-radius: 0 !important;
+}
+
+.btn-black:hover {
+  background-color: var(--mainLIghtGreen);
+  color: var(--mainWhite);
+}
+
+.cart-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  
 }
 
 /* NAVBAR */
@@ -36,6 +64,20 @@ body {
   text-decoration: none;
   color: var(--mainBlack);
 }
+
+.shopping-cart-img-number {
+  display: inline-flex;
+}
+
+.shopping-cart-img-number i {
+  margin: 7%;
+}
+
+.shopping-cart-img-number p {
+  margin-left: 15%;
+}
+
+
 /* SEARCH BAR */
 .search {
   width: 100%;
@@ -99,7 +141,7 @@ body {
 }
 
 /* BUTTONS */ 
-.product-price-btn {
+/* .product-price-btn {
   height: 103px;
   width: 327px;
   margin-top: 17px;
@@ -116,9 +158,9 @@ body {
   font-size: 28px;
   font-weight: lighter;
   color: #474747;
-}
-/* 
-.product-price-btn button {
+} */
+
+.product-price-btn {
   float: right;
   display: inline-block;
   height: 50px;
@@ -136,9 +178,9 @@ body {
   background-color: black;
   cursor: pointer;
   outline: none;
-} */
+}
 
-.product-price-btn button:hover {
+.product-price-btn:hover {
   background-color: #79b0a1;
 }
 
@@ -184,5 +226,54 @@ body {
 
 .product-title {
   margin-top: 40%;
-
 }
+
+.image-box {
+  margin-top: 10%;
+}
+
+/* MODAL */
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal {
+  background-color: var(--mainWhite);
+}
+
+/* SHOPPING CART */
+
+.center {
+  vertical-align: middle;
+  align-self: center;
+}
+
+.shop-bag {
+  margin: 5% 7%;
+}
+
+.shop-bag-img {
+  width: 80px;
+  margin-left: 20%;
+}
+
+.text-full-shop {
+  text-align: center;
+  margin: 3%;
+}
+  
+.text-empty-shop {
+  text-align: center;
+  margin: 10%;
+}
+
+

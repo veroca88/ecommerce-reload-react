@@ -7,8 +7,6 @@ export default function Modal() {
     <ProductContext.Consumer>
       {(context) => {
         const { knobOpen, closeKnob, orderItem } = context;
-        console.log("CONTEXT", context);
-
         if (!knobOpen) {
           return null;
         } else {

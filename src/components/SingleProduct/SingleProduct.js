@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { ProductContext } from "../context/ProductsProvider";
 
+
 // List of all the products
 
 class SingleProduct extends Component {
