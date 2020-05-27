@@ -5,7 +5,7 @@ export default function FooterShoppingCart({ value }) {
   const { subTotal, tax, total, clearList } = value;
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-right">
             <Link to="/">
