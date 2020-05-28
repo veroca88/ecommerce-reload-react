@@ -9,8 +9,11 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import DetailsProduct from './components/SingleProduct/DetailsProduct';
 import RandomOutfit from './components/RandomOutfit/RandomOutfit';
 import PageNotFound from './components/PageNotFound/PageNotFound';
-import HomePage from './components/HomePage/HomePage'
-import Modal from './components/Modal/Modal'
+import HomePage from './components/HomePage/HomePage';
+import Modal from './components/Modal/Modal';
+import SignIn from './components/Authentication/Signup';
+import LogIn from './components/Authentication/Login';
+import Profile from './components/User/Profile'
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
     <Navbar />
     <Switch>
     <Route exact path='/' component={HomePage} />
+    <Route exact path='/signup' component={SignIn} />
+    <Route exact path='/login' component={LogIn} />
+    <Route exact path='/profile' component={Profile} />
       <Route path='/findGift' component={RandomOutfit} />
       <Route path='/products' component={ProductList} />
       <Route path='/details/:productId' component={DetailsProduct} />

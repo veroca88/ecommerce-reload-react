@@ -70,12 +70,9 @@ class DetailsProduct extends Component {
                               })}
                           </select>
                         </div>
-                        <div
-                        // className="product-price-btn"
-                        // className="box-btns"
-                        >
+                        <div>
                           <button
-                            className="product-price-btn"
+                            className="btn btn-sm btn-dark text-uppercase"
                             disabled={orderItem.inShoppingCart ? true : false}
                             onClick={() => {
                               addToCart(orderItem);
@@ -89,7 +86,7 @@ class DetailsProduct extends Component {
                           </button>
 
                           <Link to="/products">
-                            <button className="product-price-btn">
+                            <button className="btn btn-sm btn-dark text-uppercase" >
                               <h6>Back to Products</h6>
                             </button>
                           </Link>
