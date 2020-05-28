@@ -35,21 +35,6 @@ class ProductProvider extends Component {
       .catch((err) => console.log("Error while getting the product: ", err));
   }
 
-  //TOGGLE WISHLIST
-
-  // toggleProduct = (id) => {
-  //   const { wishList } = this.state
-  //   const product = this.getProduct(id);
-  //   product.favorite = true;
-  //   wishList.push(product);
-  //   console.log('id', product)
-  //   this.setState(state => ({
-  //     wishList: [...wishList],
-  //   }))
-  //   console.log('wishList', this.state.wishList)
-
-  // }
-
   // SEARCH BAR
 
   handleSearchItems = (e) => {
@@ -85,19 +70,7 @@ class ProductProvider extends Component {
     }));
   };
 
-  // ADD TO CART
-
-  addToCart = (order) => {
-    const { shoppingCart } = this.state;
-    shoppingCart.push(order);
-    this.setState((prevState) => ({
-      ...prevState,
-      shoppingCart: [...shoppingCart],
-    }), this.calculateTotals()
-    );
-  };
-
-  // GET ELEMENT
+ // GET ELEMENT
 
   getProduct = (id) => {
     const product = this.state.productsList.find(
@@ -109,7 +82,6 @@ class ProductProvider extends Component {
   // SET ITEM BY ID
 
   setProductById = (id) => {
-    // const product = this.state.productsList.find(oneProduct => oneProduct._id === id);
     const product = this.getProduct(id);
     this.setState({
       currentProduct: product,
@@ -150,41 +122,96 @@ class ProductProvider extends Component {
     });
   };
 
+   // ADD TO CART
+
+   addToCart = (order) => {
+    const { shoppingCart, productsList } = this.state;
+    let tempProducts= [...productsList]
+    shoppingCart.push(order);
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        productsList: tempProducts,
+        shoppingCart: [...shoppingCart],
+      }),
+      this.calculateTotals()
+    );
+    console.log('PRODUCTS EN PRODUCT LIST', this.state.productsList)
+    console.log('aDDED TO Cart', this.state.shoppingCart)
+  };
+
   // INCREMENT
 
   addQuantity = (id) => {
-    console.log('INCREMENT')
-  }
+    const {  orderItem, shoppingCart } = this.state;
+    let tempCart = [...shoppingCart]
+
+    let productInChange = tempCart.find(product => product._id === id)
+    productInChange.count += 1;
+    productInChange.total = productInChange.count * productInChange.cost
+    this.setState({
+      orderItem: productInChange,
+      shoppingCart: [...tempCart]
+    }, () => {this.calculateTotals()});
+    console.log( 'ITEM', orderItem, 'shop', shoppingCart)
+  };
 
   subtractQuantity = (id) => {
-    console.log('DECREMENT')
-  }
+    const {  orderItem, shoppingCart } = this.state;
+    let tempCart = [...shoppingCart]
+
+    let productInChange = tempCart.find(product => product._id === id)
+    productInChange.count -= 1;
+    if (productInChange.count === 0) {
+      this.deleteProduct(id);
+    } else {
+      productInChange.total = productInChange.count * productInChange.cost
+    }
+    this.setState({
+      orderItem: productInChange,
+      shoppingCart: [...tempCart]
+    }, () => {this.calculateTotals()});
+    console.log( 'ITEM', orderItem, 'shop', shoppingCart)  
+  };
 
   deleteProduct = (id) => {
-    console.log('DEleted ONE PRODUCT')
-  }
-
-  clearList = () => {
-    console.log('DEleted LIST')
-  }
-
-  calculateTotals = () => {
-    const { shoppingCart } = this.state
+    const { shoppingCart } = this.state;
+    let tempCart = [...shoppingCart];
     let subTotal = 0;
-    shoppingCart.map(eachProduct => (subTotal += eachProduct.cost));
+    tempCart = tempCart.filter((product) => product._id !== id);
+    tempCart.map((eachProduct) => (subTotal += eachProduct.cost));
     const taxTemp = subTotal * 0.07;
     const totalTax = parseFloat(taxTemp.toFixed(2));
     const total = subTotal + totalTax;
     this.setState({
+      shoppingCart: [...tempCart],
       subTotal: subTotal,
       tax: totalTax,
-      total: total
-    })
-    console.log('CALLING', shoppingCart)
+      total: total,
+    });
+  };
 
-  }
+  clearList = () => {
+    this.setState({
+      shoppingCart: [],
+    });
+  };
 
-
+  calculateTotals = () => {
+    const { shoppingCart, orderItem } = this.state;
+    console.log(' ORDER ITEM', orderItem)
+    let subTotal = 0;
+    shoppingCart.map((eachProduct) => (subTotal += eachProduct.cost));
+    const taxTemp = subTotal * 0.07;
+    const totalTax = parseFloat(taxTemp.toFixed(2));
+    const total = subTotal + totalTax;
+    this.setState({
+      shoppingCart: shoppingCart,
+      subTotal: subTotal,
+      tax: totalTax,
+      total: total,
+  });
+}
 
   render() {
     const {
@@ -231,9 +258,9 @@ class ProductProvider extends Component {
           handleSearchItems,
           setProductById,
           addQuantity,
-      subtractQuantity,
-      deleteProduct,
-      clearList,
+          subtractQuantity,
+          deleteProduct,
+          clearList,
         }}
       >
         {this.props.children}
