@@ -68,14 +68,12 @@ function Login() {
                             {message && (
                               <div className="error-message">{message}</div>
                             )}
-                            <div className="product-price-btn">
                             <button
-                              // className="btn btn-lg btn-dark btn-block text-uppercase"
+                              className="btn btn-lg btn-dark text-uppercase"
                               type="submit"
                               >
                               LogIn
                             </button>
-                              </div>
                           </form>
                         </div>
                       </div>

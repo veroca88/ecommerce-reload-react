@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom'
-import ProductProvider from './components/context/ProductsProvider'
+import { BrowserRouter } from 'react-router-dom';
+import ProductProvider from './components/context/ProductsProvider';
+import AuthProvider from './components/context/Authentication';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
+  <AuthProvider>
   <ProductProvider>
     <App />
   </ProductProvider>
+  </AuthProvider>
   </BrowserRouter>
   , document.getElementById('root')
 );
