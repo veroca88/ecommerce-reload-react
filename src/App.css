@@ -60,6 +60,18 @@ body {
   display: contents;
 }
 
+
+.link-navbar:hover {
+  text-decoration: none;
+  color: #424242;
+}
+
+.link-navbar {
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+}
+
 .style-link {
   text-decoration: none;
   color: var(--mainBlack);
@@ -77,6 +89,44 @@ body {
   margin-left: 15%;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0px;
+  background-color: #f9f9f9;
+  /* min-width: 160px; */
+  width: 200px;
+  padding-top: 10px;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  text-decoration: none;
+}  
+
+.right-side {
+  float: right;
+  margin: 0px;
+}
+.small-notification {
+  font-size: 12px;
+}
+
+.small-notification a {
+  display: inline;
+  margin: 0;
+}
+/* HOME PAGE */
+
+.home-acordion {
+  margin-top: 5%;
+}
 
 /* SEARCH BAR */
 .search {
@@ -140,47 +190,14 @@ body {
     width: 32px;
 }
 
-/* BUTTONS */ 
-/* .product-price-btn {
-  height: 103px;
-  width: 327px;
-  margin-top: 17px;
-  position: relative;
+
+.btn {
+  display: inline;
+  text-align: center;
+  margin: 5px 40px 5px 16px;
 }
 
-.product-price-btn p {
-  display: inline-block;
-  position: absolute;
-  top: -13px;
-  height: 50px;
-  font-family: 'Trocchi', serif;
-  margin: 0 0 0 38px;
-  font-size: 28px;
-  font-weight: lighter;
-  color: #474747;
-} */
-
-.product-price-btn {
-  float: right;
-  display: inline-block;
-  height: 50px;
-  width: 176px;
-  margin: 0 40px 5px 16px;
-  box-sizing: border-box;
-  border: transparent;
-  border-radius: 60px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #ffffff;
-  background-color: black;
-  cursor: pointer;
-  outline: none;
-}
-
-.product-price-btn:hover {
+.btn:hover {
   background-color: #79b0a1;
 }
 

@@ -30,10 +30,10 @@ export default function Modal() {
                         pathname: `/details/${orderItem._id}`,
                       }}
                     >
-                      <button onClick={() => closeKnob()}>Add to Cart</button>
+                      <button className="btn btn-sm btn-dark text-uppercase" onClick={() => closeKnob()}>Add to Cart</button>
                     </Link>
                     <Link to="/products">
-                      <button onClick={() => closeKnob()}>Go Back</button>
+                      <button className="btn btn-sm btn-dark text-uppercase" onClick={() => closeKnob()}>Go Back</button>
                     </Link>
                   </div>
                 </div>

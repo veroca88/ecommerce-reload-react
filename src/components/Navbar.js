@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../green.png'
 import { ProductContext } from './context/ProductsProvider';
+import { AuthContext } from './context/Authentication'
 
 class Navbar extends Component {
   render() {
@@ -20,7 +21,53 @@ class Navbar extends Component {
             <Link to='/findGift' className='style-link nav-link'>
             Find a Gift
             </Link>
-            <Link to='/shoppingCart' className='style-link ml-auto'>  
+            <div className='style-link ml-auto'>
+              <AuthContext.Consumer>
+                {context => {
+                  const { isLoggedIn } = context.state;
+                  return (
+                    <>
+                    {isLoggedIn ? (
+                      <>
+                      <Link to="/"
+                      className="link-navbar"
+                      onClick={context.handleLogout}
+                    >
+                      Logout
+                    </Link>
+                    <Link className="link-navbar" to="/profile">
+                      My account{" "}
+                    </Link>
+                    </>
+                    ) : (
+                      <div className="dropdown">
+                      <Link to="/signup" className='style-link ml-auto nav-link'>
+                        Sign In
+                      </Link>
+                      <div className="dropdown-content">
+                        <Link className="nav-link link-navbar" to="/login">
+                          Login
+                        </Link>
+                        <Link className="nav-link link-navbar" to="/login">
+                          {" "}
+                          My account{" "}
+                        </Link>
+                        <Link
+                          className="small-notification nav-link link-navbar"
+                          to="/signup"
+                        >
+                          Not a member yet? <i>Join here</i>
+                        </Link>
+                      </div>
+                    </div>
+
+                    )}
+                    </>
+                  )
+                }}
+              </AuthContext.Consumer>
+            
+            <Link to='/shoppingCart' className='style-link' >  
             <ProductContext.Consumer>
               {context => {
                 const { shoppingCart } = context;
@@ -33,6 +80,8 @@ class Navbar extends Component {
               }}
               </ProductContext.Consumer>            
             </Link>
+
+            </div>
           </li>
         </ul>
         </nav>

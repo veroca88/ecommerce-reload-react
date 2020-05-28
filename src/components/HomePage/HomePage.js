@@ -4,7 +4,7 @@ import BestSellers from './BestSellers'
 class HomePage extends Component {
     render() {
         return (
-            <div>
+            <div className='container-fluid home-acordion'>
                 <BestSellers />
             </div>
         );
