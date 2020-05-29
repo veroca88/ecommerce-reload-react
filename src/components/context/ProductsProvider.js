@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PRODUCT_SERVICE from "../services/ProductService";
 
 export const ProductContext = React.createContext();
@@ -220,7 +220,7 @@ class ProductProvider extends Component {
       })
   }
 
-  render() {
+   render() {
     const {
       state,
       addToCart,
@@ -234,6 +234,7 @@ class ProductProvider extends Component {
       subtractQuantity,
       deleteProduct,
       clearList,
+      randomCard
     } = this;
     const {
       productsList,
@@ -268,6 +269,7 @@ class ProductProvider extends Component {
           subtractQuantity,
           deleteProduct,
           clearList,
+          randomCard
         }}
       >
         {this.props.children}
