@@ -13,7 +13,7 @@ class DetailsProduct extends Component {
             const { currentProduct, orderItem } = context.state;
             const { handleItem, addToCart, handleSubmit,  } = context
             return (
-                           <section>
+              <section>
                 <form onSubmit={handleSubmit}>
                   <div className="image-box">
                     <div className="row ">
