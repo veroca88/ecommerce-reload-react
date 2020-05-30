@@ -21,7 +21,7 @@ class PageNotFound extends Component {
                   {/* <p>..Thank you!</p> */}
                   <div className="btn-center product-price-btn">
                     <Link to="/">
-                      <button className="btn btn-sm btn-dark text-uppercase">Go to Home</button>
+                      <button className="btn btn-lg btn-dark text-uppercase">Go to Home</button>
                     </Link>
                   </div>
                 </div>

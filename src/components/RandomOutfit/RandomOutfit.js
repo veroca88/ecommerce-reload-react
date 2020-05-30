@@ -29,7 +29,7 @@ class DailyInspiration extends Component {
                     </p>
                   </div>
                     <Link to="/products">
-                      <button className="btn btn-sm btn-dark text-uppercase" type="button">See on Products</button>
+                      <button className="btn btn-lg btn-dark text-uppercase"  type="button">See on Products</button>
                     </Link>
                 </div>
               </div>

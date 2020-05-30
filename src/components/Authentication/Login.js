@@ -69,7 +69,7 @@ function Login() {
                               <div className="error-message">{message}</div>
                             )}
                             <button
-                              className="btn btn-lg btn-dark text-uppercase"
+                              className="btn btn-lg btn-dark text-uppercase" 
                               type="submit"
                               >
                               LogIn
