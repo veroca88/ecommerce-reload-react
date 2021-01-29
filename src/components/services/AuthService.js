@@ -20,22 +20,22 @@ const AUTH_SERVICE = {
 
     // passport.authenticate('local'),
     console.log('user data in the service: ', baseURL)
-    return service.post('/api/login', userData);
+    return service.post(`${baseURL}api/login`, userData);
   },
   
   logout() {
 
-    return service.post('/api/logout', {});
+    return service.post(`${baseURL}api/logout`, {});
   },
   
   getUser() {
     console.log('getuser data in the service: ');
-    return service.get('/api/isLoggedIn');
+    return service.get(`${baseURL}api/isLoggedIn`);
   },
 
   updateProfile(userData) {
     console.log({userData})
-    return service.post(`/api/profile/upload`, userData);
+    return service.post(`${baseURL}api/profile/upload`, userData);
   }
 
 };
